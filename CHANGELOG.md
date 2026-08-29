@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-08-29
+
+### Added
+
+- **Boop sink** (`FYI.Sink.Boop`) - push notifications to your phone through a self-hosted [Boop](https://github.com/chrisgreg/boop) server. Configure `url` and `api_key`; optional `source`, `level`/`levels` (per-event-glob), `dashboard_url` ("Open in FYI" button) and `actions`. The event name is sent as the Boop fingerprint so repeats group in the inbox.
 - **Ecto prefix configuration** - Support namespacing through PostgreSQL schemas, also called "prefixes" in Ecto.
   - Excluding the `prefix` configuration will use primary schema (usually public).
 

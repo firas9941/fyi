@@ -1,7 +1,7 @@
 defmodule FYI.MixProject do
   use Mix.Project
 
-  @version "1.0.2"
+  @version "1.1.0"
   @source_url "https://github.com/chrisgreg/fyi"
 
   def project do
@@ -15,7 +15,7 @@ defmodule FYI.MixProject do
 
       # Hex
       name: "FYI",
-      description: "In-app events & feedback with Slack/Telegram notifications for Phoenix",
+      description: "In-app events & feedback with Slack, Telegram and Boop (push) notifications for Phoenix",
       package: package(),
       docs: docs(),
       source_url: @source_url,

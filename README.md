@@ -74,7 +74,7 @@ config :fyi,
   ],
   routes: [
     %{match: "waitlist.*", sinks: [:slack]},
-    %{match: "purchase.*", sinks: [:slack, :telegram]},
+    %{match: "purchase.*", sinks: [:slack, :telegram, :boop]},
     %{match: "feedback.*", sinks: [:slack]}
   ]
 ```
@@ -265,6 +265,22 @@ New events will appear instantly without refreshing the page.
    - Group IDs are negative numbers
 
 </details>
+
+### Boop (push to your phone)
+
+[Boop](https://github.com/chrisgreg/boop) is a tiny self-hosted notification inbox with an iOS app. Point the sink at your server with a project API key and every routed event becomes a push:
+
+```elixir
+{FYI.Sink.Boop, %{
+  url: System.get_env("BOOP_URL"),           # https://boop.example.com
+  api_key: System.get_env("BOOP_API_KEY"),   # boop_proj_... from the Boop web UI
+  source: "my_app",                          # optional
+  levels: %{"user.*" => "success", "purchase.*" => "success", "*.failed" => "error"},  # optional
+  dashboard_url: "https://my-app.com/admin/fyi"  # optional: "Open in FYI" button on the push
+}}
+```
+
+The event name becomes the Boop `fingerprint`, so repeats group into one inbox row with a count; the payload is the notification body; actor, tags and the full payload are attached as data. Add `actions: fn event -> [%{label: "Open user", url: ...}] end` for extra buttons (three at most, including the dashboard one).
 
 ## Custom Sinks
 
